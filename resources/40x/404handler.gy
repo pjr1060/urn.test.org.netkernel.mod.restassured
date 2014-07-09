@@ -1,0 +1,21 @@
+req=context.source("arg:request")
+id=req.getIdentifier();
+
+message="""<html>
+<body>
+<h1>
+Custom 404
+</h1>
+<p>
+Dude your resource
+</p>
+<p style="font-weight: bold;">
+$id
+</p>
+<p>
+doesn't exist Dude!
+</p>
+</body>
+</html>"""
+resp=context.createResponseFrom(message.toString())
+resp.setMimeType("text/html")

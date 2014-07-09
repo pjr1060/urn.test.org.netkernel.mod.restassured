@@ -1,0 +1,6 @@
+s=context.source("arg:operand");
+
+s+="\n\nFootnote: Added by Post Handler"
+
+resp=context.createResponseFrom(s);
+resp.setMimeType("text/plain")

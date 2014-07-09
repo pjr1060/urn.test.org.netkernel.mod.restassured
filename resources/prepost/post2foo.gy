@@ -1,0 +1,4 @@
+foo=context.getThisRequest().getArgumentValue("foo")
+
+resp=context.createResponseFrom("Hello $foo".toString());
+resp.setMimeType("text/plain")

@@ -1,0 +1,275 @@
+<config>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>foo</simple>
+				<method>GET</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:foo1</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo1.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>foo</simple>
+				<method>POST</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:foo2</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo2.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>foo/{part}</simple>
+				<method>GET</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:foo3</identifier>
+				<argument name="part" />
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo3.gy</argument>
+			<argument name="part">arg:part</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>foo/{part}</simple>
+				<method>POST</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:foo4</identifier>
+				<argument name="part" />
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo4.gy</argument>
+			<argument name="part">arg:part</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>echoMethod</simple>
+				<method>GET</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:echoMethodGet</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/echoMethod.gy</argument>
+			<argument name="type">echoMethodGet</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>echoMethod</simple>
+				<method>POST</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:echoMethodPost</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/echoMethod.gy</argument>
+			<argument name="type">echoMethodPost</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>echoMethod</simple>
+				<method>PUT</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:echoMethodPut</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/echoMethod.gy</argument>
+			<argument name="type">echoMethodPut</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>echoMethod</simple>
+				<method>DELETE</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:echoMethodDelete</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/echoMethod.gy</argument>
+			<argument name="type">echoMethodDelete</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>echoMethod</simple>
+				<method>HEAD</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:echoMethodHead</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/echoMethod.gy</argument>
+			<argument name="type">echoMethodHead</argument>
+		</request>
+	</endpoint>
+	
+	<endpoint>
+		<id>Unmanaged</id>
+		<name>Unmanaged Pass-Through Test</name>
+		<grammar>
+			<active>
+				<identifier>res:/test/RESTAssured/unmanaged</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/echoMethod.gy</argument>
+			<argument name="type">echoMethodUnmanaged</argument>
+		</request>
+	</endpoint>
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>MD5</simple>
+				<method>GET</method>
+				<Etag>MD5</Etag>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:md5Tag</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo1.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>SHA1</simple>
+				<method>GET</method>
+				<Etag>SHA-1</Etag>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:sha1Tag</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo1.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>SHA1Compress</simple>
+				<method>GET</method>
+				<Etag>SHA-256</Etag>
+				<compress/>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:sha1TagCompress</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo1.gy</argument>
+		</request>
+	</endpoint>
+	
+<!--	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>non-unique-target-grammar</simple>
+				<method>GET</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:non-unique-target-grammar</identifier>
+				<argument name="boo"/>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo1.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>non-unique-target-grammar</simple>
+				<method>POST</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:non-unique-target-grammar</identifier>
+				<argument name="boo"/>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/basic/foo1.gy</argument>
+		</request>
+	</endpoint>
+-->
+
+</config>

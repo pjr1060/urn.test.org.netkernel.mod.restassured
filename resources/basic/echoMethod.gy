@@ -1,0 +1,2 @@
+method=context.source("httpRequest:/method")
+context.createResponseFrom(method+" "+context.getThisRequest().getArgumentValue("type"));

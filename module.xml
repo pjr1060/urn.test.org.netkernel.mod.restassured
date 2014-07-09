@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="2.0">
+	<meta>
+		<identity>
+			<uri>urn:test:org:netkernel:mod:restassured</uri>
+			<version>1.0.0</version>
+		</identity>
+		<info>
+			<name>Test / Mod RESTAssured</name>
+			<description>XUnit tests of RESTAssured</description>
+			<icon>res:/expt/rest/pub/icon.png</icon>
+		</info>
+	</meta>
+	<system>
+		<dynamic />
+	</system>
+	<rootspace name="Test / RESTAssured  - Development Space" uri="urn:test:org:netkernel:mod:restassured">
+		<fileset>
+			<regex>res:/etc/system/SimpleDynamicImportHook.xml</regex>
+		</fileset>
+		<overlay>
+			<prototype>RESTOverlay</prototype>
+			<config>
+				<basepath>/test/RESTAssured/</basepath>
+				<auto404/>
+			</config>
+			<space>
+				<import>
+					<uri>urn:test:org:netkernel:mod:restassured:impl</uri>
+				</import>
+			</space>
+		</overlay>
+		<overlay>
+			<prototype>RESTOverlay</prototype>
+			<config>
+				<basepath>/test/RESTAssured40x/</basepath>
+				<auto404>404Handler</auto404>
+				<auto406>406Handler</auto406>
+				<globalExceptionTarget>TestGlobalExceptionHandler</globalExceptionTarget>
+				<maxContentLength>30</maxContentLength>
+			</config>
+			<space>
+				<mapper>
+					<config>
+						<import>res:/resources/40x/40xMapperConfig.xml</import>
+					</config>
+					<space>
+						<fileset>
+							<regex>res:/resources/.*</regex>
+						</fileset>
+						<import>
+							<uri>urn:org:netkernel:lang:groovy</uri>
+						</import>
+					</space>
+				</mapper>
+			</space>
+		</overlay>
+		<import>
+			<private/>
+			<uri>urn:org:netkernel:tpt:http</uri>
+		</import>
+	</rootspace>
+
+	<rootspace name="Test / RESTAssured  - Impl Space" uri="urn:test:org:netkernel:mod:restassured:impl">
+		<mapper>
+			<config>
+				<import>res:/resources/basic/basicMapperConfig.xml</import>
+				<import>res:/resources/cn1/cn1MapperConfig.xml</import>
+				<import>res:/resources/lang/langMapperConfig.xml</import>
+				<import>res:/resources/compress/compressMapperConfig.xml</import>
+				<import>res:/resources/prepost/preMapperConfig.xml</import>
+				<import>res:/resources/prepost/postMapperConfig.xml</import>
+				<import>res:/resources/verbTranslation/verbTranslationMapperConfig.xml</import>
+			</config>
+			<space>
+				<fileset>
+					<regex>res:/resources/.*</regex>
+				</fileset>
+				<import>
+					<uri>urn:org:netkernel:lang:groovy</uri>
+				</import>
+				<import>
+					<uri>urn:org:netkernel:ext:system</uri>
+				</import>
+				<import>
+					<uri>urn:org:netkernel:ext:layer1</uri>
+				</import>
+			</space>
+		</mapper>
+	</rootspace>
+	<rootspace name="Test / RESTAssured  - Unit Test Space" public="true" uri="urn:test:org:netkernel:mod:restassured:test">
+		<fileset>
+			<regex>res:/etc/system/Tests.xml</regex>
+		</fileset>
+		<fileset>
+			<regex>res:/resources/test/.*</regex>
+		</fileset>
+		<endpoint><!-- stop any configuration from module under test from polluting address space -->
+			<prototype>Limiter</prototype>
+			<grammar>
+				res:/etc/
+				<regex type="anything" />
+			</grammar>
+		</endpoint>
+		<import>
+			<uri>urn:org:netkernel:mod:restassured</uri>
+		</import>
+		<import>
+			<uri>urn:org:netkernel:ext:layer1</uri>
+		</import>
+		<import>
+			<uri>urn:org:netkernel:client:http</uri>
+		</import>
+		<import>
+			<uri>urn:org:netkernel:lang:groovy</uri>
+		</import>
+		<import>
+			<uri>urn:org:netkernel:xml:core</uri>
+		</import>
+	</rootspace>
+</module>

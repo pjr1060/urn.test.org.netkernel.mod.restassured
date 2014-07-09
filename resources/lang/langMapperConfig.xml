@@ -1,0 +1,59 @@
+<config>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>lang1</simple>
+				<method>GET</method>
+				<produces>text/plain</produces>
+				<language>en</language>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:lang1-plain-en</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/lang/lang1-plain-en.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>lang1</simple>
+				<method>GET</method>
+				<produces>text/plain</produces>
+				<language>fr</language>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:lang1-plain-fr</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/lang/lang1-plain-fr.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>lang1</simple>
+				<method>GET</method>
+				<produces>text/plain</produces>
+				<language>en-cockney</language>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:lang1-plain-en-cockney</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/lang/lang1-plain-en-cockney.gy</argument>
+		</request>
+	</endpoint>
+</config>

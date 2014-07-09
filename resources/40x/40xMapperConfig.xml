@@ -1,0 +1,171 @@
+<config>
+	<endpoint>
+		<id>404Handler</id>
+		<grammar>
+			<active>
+				<identifier>active:404</identifier>
+				<argument name="request"/>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/404handler.gy</argument>
+			<argument name="request">arg:request</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<id>406Handler</id>
+		<grammar>
+			<active>
+				<identifier>active:406</identifier>
+				<argument name="request"/>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/406handler.gy</argument>
+			<argument name="request">arg:request</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>406test</simple>
+				<method>POST</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:406Test</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/never-gets-called.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<id>TestGlobalExceptionHandler</id>
+		<grammar>
+			<active>
+				<identifier>active:globalExceptionHandler</identifier>
+				<argument name="request"/>
+				<argument name="exception"/>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/globalExceptionHandler.gy</argument>
+			<argument name="request">arg:request</argument>
+			<argument name="exception">arg:exception</argument>
+		</request>
+	</endpoint>
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>bad</simple>
+				<method>GET</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:bad</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/never-gets-called.gy</argument>
+		</request>
+	</endpoint>
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>badWithHandler</simple>
+				<method>GET</method>
+				<exceptionTarget>LocalExceptionHandler</exceptionTarget>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:badWithHandler</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/never-gets-called.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<id>LocalExceptionHandler</id>
+		<grammar>
+			<active>
+				<identifier>active:localExceptionHandler</identifier>
+				<argument name="request"/>
+				<argument name="exception"/>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/localExceptionHandler.gy</argument>
+			<argument name="request">arg:request</argument>
+			<argument name="exception">arg:exception</argument>
+		</request>
+	</endpoint>
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>413Test</simple>
+				<method>POST</method>
+				<maxContentLength>10</maxContentLength>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:413Test</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/never-gets-called.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>413Test2</simple>
+				<method>POST</method>
+				<maxContentLength>20</maxContentLength>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:413Test2</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/contentSize.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>413TestGlobal</simple>
+				<method>POST</method>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:413TestGlobal</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/40x/contentSize.gy</argument>
+		</request>
+	</endpoint>
+
+</config>

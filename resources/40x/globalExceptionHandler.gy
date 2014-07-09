@@ -1,0 +1,18 @@
+we=context.source("arg:exception")
+e=we.getException().getDeepestMessage();
+
+message="""<html>
+<body>
+<h1>
+Custom Global 500
+</h1>
+<p>
+Dude something bad happened and like no-one stepped up to deal with it...
+</p>
+<p style="font-weight: bold;">
+$e
+</p>
+</body>
+</html>"""
+resp=context.createResponseFrom(message.toString())
+resp.setMimeType("text/html")

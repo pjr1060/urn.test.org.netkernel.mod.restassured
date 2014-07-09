@@ -1,0 +1,2 @@
+resp=context.createResponseFrom("Francais")
+resp.setMimeType("text/plain")

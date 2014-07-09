@@ -1,0 +1,195 @@
+<config>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn1</simple>
+				<method>GET</method>
+				<produces>text/xml</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn1-xml</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn1-xml.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn1</simple>
+				<method>GET</method>
+				<produces>application/json</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn1-json</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn1-json.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn1</simple>
+				<method>GET</method>
+				<produces>text/plain</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn1-plain</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn1-plain.gy</argument>
+		</request>
+	</endpoint>
+	
+	
+	
+	
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn2</simple>
+				<method>POST</method>
+				<consumes>text/xml</consumes>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn2-xml</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn2-xml.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn2</simple>
+				<method>POST</method>
+				<consumes>text/plain</consumes>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn2-plain</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn2-plain.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn2</simple>
+				<method>POST</method>
+				<consumes>application/json</consumes>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn2-json</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn2-json.gy</argument>
+		</request>
+	</endpoint>
+	
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn3</simple>
+				<method>POST</method>
+				<consumes>text/xml</consumes>
+				<produces>text/xml</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn3-xml-xml</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn1-xml.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn3</simple>
+				<method>POST</method>
+				<consumes>text/plain</consumes>
+				<produces>text/xml</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn3-plain-xml</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn1-xml.gy</argument>
+		</request>
+	</endpoint>
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn3</simple>
+				<method>POST</method>
+				<consumes>text/plain</consumes>
+				<produces>text/plain</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn3-plain-plain</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn1-plain.gy</argument>
+		</request>
+	</endpoint>
+	
+	<endpoint>
+		<meta>
+			<rest>
+				<simple>cn4</simple>
+				<method>POST</method>
+				<consumes>text/xml,text/plain,text/json</consumes>
+				<produces>text/plain</produces>
+			</rest>
+		</meta>
+		<grammar>
+			<active>
+				<identifier>active:cn4-plain-mixed</identifier>
+			</active>
+		</grammar>
+		<request>
+			<identifier>active:groovy</identifier>
+			<argument name="operator">res:/resources/cn1/cn4-mixed.gy</argument>
+		</request>
+	</endpoint>
+	
+</config>

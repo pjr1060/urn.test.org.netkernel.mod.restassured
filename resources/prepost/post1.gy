@@ -1,0 +1,2 @@
+resp=context.createResponseFrom("Hello World");
+resp.setMimeType("text/plain")

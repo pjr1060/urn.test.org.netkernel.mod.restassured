@@ -1,0 +1,2 @@
+part=context.getThisRequest().getArgumentValue("part");
+context.createResponseFrom("POST foo "+part);

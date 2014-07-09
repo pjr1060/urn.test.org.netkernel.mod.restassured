@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests>
+	<test>
+		<id>test:urn:test:org:netkernel:mod:restassured</id>
+		<name>Test / RESTAssured </name>
+		<desc>RESTAssured tests</desc>
+		<uri>res:/resources/test/testlist.xml</uri>
+	</test>
+</tests>

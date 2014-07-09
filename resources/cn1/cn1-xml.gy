@@ -1,0 +1,2 @@
+resp=context.createResponseFrom("<hello>World</hello>")
+resp.setMimeType("text/xml")

@@ -1,0 +1,3 @@
+s=context.source("httpRequest:/header/Content-Length")
+resp=context.createResponseFrom(s);
+resp.setMimeType("text/plain");

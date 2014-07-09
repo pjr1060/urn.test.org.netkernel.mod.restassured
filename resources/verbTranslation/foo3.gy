@@ -1,0 +1,2 @@
+presp=context.sourcePrimaryForResponse(Object.class);
+context.createResponseFrom(presp.getMimeType());
