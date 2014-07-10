@@ -1,0 +1,81 @@
+<testlist>
+	<import>res:/org/netkernel/xml/assert/assertLibrary.xml</import>
+
+	<test name="Clear any stored XML config">
+		<request>
+			<verb>DELETE</verb>
+			<identifier>active:RESTAssured/xml-config</identifier>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Set XML config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/xml-config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<xml-config>
+						<namespace-aware>true</namespace-aware>
+						<namespaces>
+							<namespace>
+								<prefix>xyz</prefix>
+								<uri>http://xyz.com/ns/foobar</uri>
+							</namespace>
+							<namespace>
+								<prefix>abc</prefix>
+								<uri>http://abc.com/ns/blah</uri>
+							</namespace>
+						</namespaces>
+					</xml-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Fetch RA XML config">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/xml-config</identifier>
+		</request>
+		<assert>
+			<class>com.jayway.restassured.config.RestAssuredConfig</class>
+		</assert>
+	</test>
+
+	<test name="Fetch XML Namespaces config">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/xml-config/namespaces</identifier>
+		</request>
+		<assert>
+			<class>javax.xml.namespace.NamespaceContext</class>
+		</assert>
+	</test>
+
+	<test name="Clear stored XML config">
+		<request>
+			<verb>DELETE</verb>
+			<identifier>active:RESTAssured/xml-config</identifier>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Should return empty XML Namespaces config">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/xml-config/namespaces</identifier>
+		</request>
+		<assert>
+			<class>javax.xml.namespace.NamespaceContext</class>
+		</assert>
+	</test>
+
+</testlist>

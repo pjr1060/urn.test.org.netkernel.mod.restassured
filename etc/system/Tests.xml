@@ -7,9 +7,15 @@
 		<uri>res:/resources/test/testlist.xml</uri>
 	</test>
 	<test>
-		<id>test:urn:test:org:netkernel:mod:restassured:accessors</id>
-		<name>Test / RESTAssured Accessors</name>
-		<desc>RESTAssured accessor tests</desc>
-		<uri>res:/resources/test/accessor-testlist.xml</uri>
+		<id>test:urn:test:org:netkernel:mod:restassured:ra-config</id>
+		<name>Test / RESTAssured Static Config</name>
+		<desc>RESTAssured static config tests</desc>
+		<uri>res:/resources/test/ra-config-testlist.xml</uri>
+	</test>
+	<test>
+		<id>test:urn:test:org:netkernel:mod:restassured:xml-config</id>
+		<name>Test / RESTAssured XML Config</name>
+		<desc>RESTAssured XML config tests</desc>
+		<uri>res:/resources/test/xml-config-testlist.xml</uri>
 	</test>
 </tests>
