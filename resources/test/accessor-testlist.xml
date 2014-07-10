@@ -1,0 +1,277 @@
+<testlist>
+	<import>res:/org/netkernel/xml/assert/assertLibrary.xml</import>
+
+	<test name="Clear RESTAssured static config">
+		<request>
+			<verb>DELETE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Test default static config">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://localhost'</xpath>
+			<xpath>string(/ra-config/port)='8080'</xpath>
+			<xpath>string(/ra-config/basePath)=''</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='true'</xpath>
+			<xpath>/ra-config/authentication/none</xpath>
+		</assert>
+	</test>
+
+	<test name="Set Rest Assured static config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<ra-config>
+						<baseURI>http://example.com</baseURI>
+						<port>9876</port>
+						<basePath>/nowhere/man</basePath>
+						<urlEncodingEnabled>false</urlEncodingEnabled>
+					</ra-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Check updated static config">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
+			<xpath>string(/ra-config/port)='9876'</xpath>
+			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
+			<xpath>/ra-config/authentication/none</xpath>
+		</assert>
+	</test>
+
+	<test name="Set basic authentication in static config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<ra-config>
+						<baseURI>http://example.com</baseURI>
+						<port>9876</port>
+						<basePath>/nowhere/man</basePath>
+						<urlEncodingEnabled>false</urlEncodingEnabled>
+						<authentication>
+							<basic>
+								<userName>spiderman</userName>
+								<password>spideysense</password>
+							</basic>
+						</authentication>
+					</ra-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Check updated static config with basic auth">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
+			<xpath>string(/ra-config/port)='9876'</xpath>
+			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
+			<xpath>/ra-config/authentication/basic</xpath>
+			<xpath>string(/ra-config/authentication/basic/userName)='spiderman'</xpath>
+			<xpath>string(/ra-config/authentication/basic/password)='spideysense'</xpath>
+		</assert>
+	</test>
+
+	<test name="Set digest authentication in static config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<ra-config>
+						<baseURI>http://example.com</baseURI>
+						<port>9876</port>
+						<basePath>/nowhere/man</basePath>
+						<urlEncodingEnabled>false</urlEncodingEnabled>
+						<authentication>
+							<digest>
+								<userName>superman</userName>
+								<password>kryptonite</password>
+							</digest>
+						</authentication>
+					</ra-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Check updated static config with digest auth (actually basic)">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
+			<xpath>string(/ra-config/port)='9876'</xpath>
+			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
+			<xpath>/ra-config/authentication/basic</xpath>
+			<xpath>string(/ra-config/authentication/basic/userName)='superman'</xpath>
+			<xpath>string(/ra-config/authentication/basic/password)='kryptonite'</xpath>
+		</assert>
+	</test>
+
+	<test name="Set oauth authentication in static config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<ra-config>
+						<baseURI>http://example.com</baseURI>
+						<port>9876</port>
+						<basePath>/nowhere/man</basePath>
+						<urlEncodingEnabled>false</urlEncodingEnabled>
+						<authentication>
+							<oauth>
+								<consumerKey>shopshopshop</consumerKey>
+								<consumerSecret>likespickles</consumerSecret>
+								<accessToken>letmein</accessToken>
+								<secretToken>precious</secretToken>
+							</oauth>
+						</authentication>
+					</ra-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Check updated static config with oauth 1 authentication">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
+			<xpath>string(/ra-config/port)='9876'</xpath>
+			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
+			<xpath>/ra-config/authentication/oauth</xpath>
+			<xpath>string(/ra-config/authentication/oauth/consumerKey)='shopshopshop'</xpath>
+			<xpath>string(/ra-config/authentication/oauth/consumerSecret)='likespickles'</xpath>
+			<xpath>string(/ra-config/authentication/oauth/accessToken)='letmein'</xpath>
+			<xpath>string(/ra-config/authentication/oauth/secretToken)='precious'</xpath>
+		</assert>
+	</test>
+
+	<test name="Set oauth2 authentication in static config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<ra-config>
+						<baseURI>http://example.com</baseURI>
+						<port>9876</port>
+						<basePath>/nowhere/man</basePath>
+						<urlEncodingEnabled>false</urlEncodingEnabled>
+						<authentication>
+							<oauth2>
+								<accessToken>supersecret</accessToken>
+							</oauth2>
+						</authentication>
+					</ra-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Check updated static config with oauth 2 authentication">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
+			<xpath>string(/ra-config/port)='9876'</xpath>
+			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
+			<xpath>/ra-config/authentication/oauth2</xpath>
+			<xpath>string(/ra-config/authentication/oauth2/accessToken)='supersecret'</xpath>
+		</assert>
+	</test>
+
+	<test name="Clear RESTAssured static config for safety">
+		<request>
+			<verb>DELETE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Test that default static config has been restored">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://localhost'</xpath>
+			<xpath>string(/ra-config/port)='8080'</xpath>
+			<xpath>string(/ra-config/basePath)=''</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='true'</xpath>
+			<xpath>/ra-config/authentication/none</xpath>
+		</assert>
+	</test>
+
+</testlist>

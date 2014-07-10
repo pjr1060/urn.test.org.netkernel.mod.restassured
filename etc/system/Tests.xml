@@ -6,4 +6,10 @@
 		<desc>RESTAssured tests</desc>
 		<uri>res:/resources/test/testlist.xml</uri>
 	</test>
+	<test>
+		<id>test:urn:test:org:netkernel:mod:restassured:accessors</id>
+		<name>Test / RESTAssured Accessors</name>
+		<desc>RESTAssured accessor tests</desc>
+		<uri>res:/resources/test/accessor-testlist.xml</uri>
+	</test>
 </tests>
