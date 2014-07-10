@@ -333,7 +333,7 @@
 		</assert>
 	</test>
 	
-	<!--
+	
 	<test name="Post http://localhost:8080/test/RESTAssured/cn2  Consumes text/xml">
 		<request>
 			<identifier>active:RESTAssured</identifier>
@@ -343,7 +343,7 @@
 				body = context.source("arg:body", IReadableBinaryStreamRepresentation.class);
 				baos=new ByteArrayOutputStream()
 				body.write(baos)
-				s=given().contentType("text/xml").body(baos.toByteArray()).post("/test/RESTAssured/cn2").asString();
+				s=given().body(baos.toByteArray()).header("Content-Type", "text/xml").post("/test/RESTAssured/cn2").asString();
 				context.createResponseFrom(s)
 			</literal>
 			</argument>
@@ -370,21 +370,15 @@
 			<stringEquals><![CDATA[hello World]]></stringEquals>
 		</assert>
 	</test>
-	-->
 	<test name="Post http://localhost:8080/test/RESTAssured/cn2  Consumes application/json">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/cn2</argument>
-			<argument name="body">
-				<request>
-					<identifier>active:groovy</identifier>
-					<argument name="operator">
-					<literal type="string"><![CDATA[
-					resp=context.createResponseFrom("{ hello: 'World' }")
-					resp.setMimeType("application/json")
-					]]></literal>
-					</argument>
-				</request>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="body"><literal type="string">{ hello: 'World' }</literal></argument>
+			<argument name="operator"><literal type="string">
+				body = context.source("arg:body");
+				s=given().body(body).header("Content-Type", "application/json").post("/test/RESTAssured/cn2").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -397,29 +391,29 @@
 	
 	<test name="Post http://localhost:8080/test/RESTAssured/cn3  Consumes text/xml Accept text/xml">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/cn3</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body"><literal type="xml"><hello>World</hello></literal></argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/xml;q=0.7, application/json;q=0.5</Accept>
-				</literal>
+			<argument name="operator"><literal type="string">
+				body = context.source("arg:body");
+				s=given().body(body).header("Content-Type", "text/xml").header("Accept", "text/xml;q=0.7, application/json;q=0.5").post("/test/RESTAssured/cn3").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
 			<stringEquals><![CDATA[<hello>World</hello>]]></stringEquals>
-		</assert>
+			</assert>
 	</test>
 	<test name="Post http://localhost:8080/test/RESTAssured/cn3  Consumes text/plain Accept text/xml">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/cn3</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body"><literal type="string">hello World</literal></argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/xml;q=0.7, application/json;q=0.5</Accept>
-				</literal>
+			<argument name="operator"><literal type="string">
+				body = context.source("arg:body");
+				s=given().body(body).header("Content-Type", "text/plain").header("Accept", "text/xml;q=0.7, application/json;q=0.5").post("/test/RESTAssured/cn3").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -429,13 +423,13 @@
 	</test>
 	<test name="Post http://localhost:8080/test/RESTAssured/cn3  Consumes text/plain Accept text/plain">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/cn3</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body"><literal type="string">hello World</literal></argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/plain;q=0.7, application/json;q=0.5</Accept>
-				</literal>
+			<argument name="operator"><literal type="string">
+				body = context.source("arg:body");
+				s=given().body(body).header("Content-Type", "text/plain").header("Accept", "text/plain;q=0.7, application/json;q=0.5").post("/test/RESTAssured/cn3").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -446,13 +440,13 @@
 	
 	<test name="Post http://localhost:8080/test/RESTAssured/cn4  Consumes text/plain Accept text/plain">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/cn4</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body"><literal type="string">hello World</literal></argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/plain</Accept>
-				</literal>
+			<argument name="operator"><literal type="string">
+				body = context.source("arg:body");
+				s=given().body(body).header("Content-Type", "text/plain").header("Accept", "text/plain").post("/test/RESTAssured/cn4").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -462,13 +456,13 @@
 	</test>
 	<test name="Post http://localhost:8080/test/RESTAssured/cn4  Consumes text/xml Accept text/plain">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/cn4</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body"><literal type="xml"><hello>World</hello></literal></argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/plain</Accept>
-				</literal>
+			<argument name="operator"><literal type="string">
+				body = context.source("arg:body", String.class);
+				s=given().body(body).header("Content-Type", "text/xml").header("Accept", "text/plain").post("/test/RESTAssured/cn4").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -477,18 +471,14 @@
 <hello>World</hello>]]></stringEquals>
 		</assert>
 	</test>
-	
-	
-	
-	
+
 	<test name="Language Get http://localhost:8080/test/RESTAssured/lang1  Accept-Language en;q=0.7, *;q=0.0">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/lang1</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept-Language>en;q=0.7, fr;q=0.1; *;q=0.0</Accept-Language>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept-Language", "en;q=0.7, fr;q=0.1; *;q=0.0").get("/test/RESTAssured/lang1").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -496,6 +486,7 @@
 			<stringEquals><![CDATA[English]]></stringEquals>
 		</assert>
 	</test>
+	<!-- TODO Could not make the equivalent RESTAssured test work - English was returned instead of Francais -->
 	<test name="Language Get http://localhost:8080/test/RESTAssured/lang1  Accept-Language en;=q=0.2, fr;q=0.7, *;q=0.0">
 		<request>
 			<identifier>active:httpGet</identifier>
@@ -511,6 +502,7 @@
 			<stringEquals><![CDATA[Francais]]></stringEquals>
 		</assert>
 	</test>
+	<!-- TODO Could not make the equivalent RESTAssured test work - English was returned instead of Inglish Init -->
 	<test name="Language Get http://localhost:8080/test/RESTAssured/lang1  Accept-Language en;q=0.2, en-cockney;q=0.7, *;q=0.0">
 		<request>
 			<identifier>active:httpGet</identifier>
@@ -528,12 +520,11 @@
 	</test>
 	<test name="Language Get http://localhost:8080/test/RESTAssured/lang1  Accept-Language en;q=0.9, en-cockney;q=0.7, *;q=0.0">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/lang1</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept-Language>en;q=0.9, en-cockney;q=0.7, *;q=0.0</Accept-Language>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept-Language", "en;q=0.9, en-cockney;q=0.7, *;q=0.0").get("/test/RESTAssured/lang1").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -542,20 +533,14 @@
 		</assert>
 	</test>
 	
-	
-	
-	
 	<test name="Compress Get http://localhost:8080/test/RESTAssured/compress1 - No encoding">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/compress1</argument>
-			<!--
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>plain/text</Accept>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept-Language", "en;q=0.9, en-cockney;q=0.7, *;q=0.0").get("/test/RESTAssured/compress1").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
-			-->
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
@@ -563,6 +548,7 @@
 Its fleece was white as snow...]]></stringEquals>
 		</assert>
 	</test>
+	<!-- TODO Could not make the equivalent RESTAssured test work - different response returned -->
 	<test name="Compress Get http://localhost:8080/test/RESTAssured/compress1 - gzip">
 		<request>
 			<identifier>active:httpGet</identifier>
@@ -578,6 +564,7 @@ Its fleece was white as snow...]]></stringEquals>
 			<notNull/>
 		</assert>
 	</test>
+	<!-- TODO Could not make the equivalent RESTAssured test work - different response returned -->
 	<test name="Compress Get http://localhost:8080/test/RESTAssured/compress1 - deflate">
 		<request>
 			<identifier>active:httpGet</identifier>
@@ -596,12 +583,11 @@ Its fleece was white as snow...]]></stringEquals>
 	
 	<test name="Relay unmanaged endpoint">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/unmanaged</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept-Encoding>deflate;q=0.7, identity;q=0.1</Accept-Encoding>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept-Encoding", "deflate;q=0.7, identity;q=0.1").get("/test/RESTAssured/unmanaged").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -612,8 +598,12 @@ Its fleece was white as snow...]]></stringEquals>
 	
 	<test name="Pre Process True">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/pre1</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/pre1").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
@@ -622,8 +612,12 @@ Its fleece was white as snow...]]></stringEquals>
 	</test>
 	<test name="Pre Process False">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/pre2</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/pre2").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
@@ -640,8 +634,12 @@ Its fleece was white as snow...]]></stringEquals>
 	
 	<test name="Post Process - static path">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/post1</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/post1").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
@@ -652,8 +650,12 @@ Footnote: Added by Post Handler]]></stringEquals>
 	</test>
 	<test name="Post Process - dynamic path">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/post2/Sodbury</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/post2/Sodbury").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
@@ -666,18 +668,33 @@ Footnote: Added by Post Handler]]></stringEquals>
 	
 	<test name="MD5 Etag">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/MD5</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/MD5").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
+		<assert>
+			<stringEquals>GET foo</stringEquals>
+		</assert>
 	</test>
 	<test name="SHA1 Etag">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/SHA1</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/SHA1").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
+		<assert>
+			<stringEquals>GET foo</stringEquals>
+		</assert>
 	</test>
+	<!-- TODO Could not make the equivalent RESTAssured test work - different response returned -->
 	<test name="SHA1 Etag Compress">
 		<request>
 			<identifier>active:httpGet</identifier>
@@ -689,9 +706,11 @@ Footnote: Added by Post Handler]]></stringEquals>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
+		<assert>
+			<notNull/>
+		</assert>
 	</test>
-	
-	
+
 	<!--
 	***********************************************
 	EXCEPTION HANDLING TESTS
@@ -699,12 +718,11 @@ Footnote: Added by Post Handler]]></stringEquals>
 	-->
 	<test name="Auto404 - Simple default">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/thisisnothere</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept-Encoding>deflate;q=0.7, identity;q=0.1</Accept-Encoding>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept-Encoding", "deflate;q=0.7, identity;q=0.1").get("/test/RESTAssured/thisisnothere").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -714,12 +732,11 @@ Footnote: Added by Post Handler]]></stringEquals>
 	</test>
 	<test name="Auto404 - Targeted Handler">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/thisisnothere</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept-Encoding>deflate;q=0.7, identity;q=0.1</Accept-Encoding>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept-Encoding", "deflate;q=0.7, identity;q=0.1").get("/test/RESTAssured40x/thisisnothere").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -745,12 +762,11 @@ doesn't exist Dude!
 	
 	<test name="Auto406 Handler Test  Get http://localhost:8080/test/RESTAssured40x/406test">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/406test</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/MADEUP;q=0.7, *;q=0</Accept>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept", "text/MADEUP;q=0.7, *;q=0").get("/test/RESTAssured40x/406test").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -777,12 +793,11 @@ but, like man, you gotta get more specific Dude!  What do you want from me Dude?
 	
 		<test name="Global Exception Handler Test  Get http://localhost:8080/test/RESTAssured40x/bad">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/bad</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/MADEUP;q=0.7, *;q=0</Accept>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept", "text/MADEUP;q=0.7, *;q=0").get("/test/RESTAssured40x/bad").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -805,12 +820,11 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	
 	<test name="Local Exception Handler Test  Get http://localhost:8080/test/RESTAssured40x/badWithHandler">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/badWithHandler</argument>
-			<argument name="headers">
-				<literal type="hds">
-					<Accept>text/MADEUP;q=0.7, *;q=0</Accept>
-				</literal>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=given().header("Accept", "text/MADEUP;q=0.7, *;q=0").get("/test/RESTAssured40x/badWithHandler").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -833,10 +847,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	
 	<test name="Post http://localhost:8080/test/RESTAssured/413Test">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/413Test</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">12345678901234567890</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured40x/413Test").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -846,10 +865,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	</test>
 	<test name="Post http://localhost:8080/test/RESTAssured/413Test2">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/413Test2</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">12345678901234567890</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured40x/413Test2").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -859,10 +883,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	</test>
 	<test name="Post http://localhost:8080/test/RESTAssured/413Test2">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/413Test2</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">123456789012345678901</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured40x/413Test2").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -873,10 +902,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	
 	<test name="Post http://localhost:8080/test/RESTAssured/413TestGlobal">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/413TestGlobal</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">123456789012345678901234567890</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured40x/413TestGlobal").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -886,10 +920,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	</test>
 	<test name="Post http://localhost:8080/test/RESTAssured/413TestGlobal">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured40x/413TestGlobal</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">1234567890123456789012345678901</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured40x/413TestGlobal").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -902,8 +941,12 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	<!--VERB TRANSLATION-->
 	<test name="Verb Trans Get http://localhost:8080/test/RESTAssured/vtfoo">
 		<request>
-			<identifier>active:httpGet</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/vtfoo</argument>
+			<identifier>active:RESTAssured</identifier>
+			<argument name="operator"><literal type="string">
+				s=get("/test/RESTAssured/vtfoo").asString();
+				context.createResponseFrom(s)
+			</literal>
+			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
@@ -912,10 +955,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	</test>
 	<test name="Verb Trans Post to SINK (DEFAULT) http://localhost:8080/test/RESTAssured/vtfoo">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/vtfoo</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">123456789012345678901</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured/vtfoo").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -925,10 +973,15 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	</test>
 	<test name="Verb Trans Post to NEW (OVERRIDE) http://localhost:8080/test/RESTAssured/vtfoo2">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/vtfoo2</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">123456789012345678901</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).post("/test/RESTAssured/vtfoo2").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
@@ -938,15 +991,20 @@ Resource [/resources/40x/never-gets-called.gy] in space [Test / RESTAssured  - D
 	</test>
 	<test name="Verb Trans Post to Sink http://localhost:8080/test/RESTAssured/vtfoo3 - with MimeType">
 		<request>
-			<identifier>active:httpPost</identifier>
-			<argument name="url">http://localhost:8080/test/RESTAssured/vtfoo3</argument>
+			<identifier>active:RESTAssured</identifier>
 			<argument name="body">
 				<literal type="string">123456789012345678901</literal>
+			</argument>
+			<argument name="operator"><literal type="string">
+				body=context.source("arg:body", String.class)
+				s=given().body(body).header("Content-Type", "text/plain;charset=UTF-8").post("/test/RESTAssured/vtfoo3").asString();
+				context.createResponseFrom(s)
+			</literal>
 			</argument>
 			<representation>java.lang.String</representation>
 		</request>
 		<assert>
-			<stringEquals>text/plain</stringEquals>
+			<stringEquals>text/plain;charset=UTF-8</stringEquals>
 		</assert>
 	</test>
 	
