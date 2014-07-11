@@ -183,4 +183,29 @@
 		</assert>
 	</test>
 
+	<test name="Clear stored XML config">
+		<request>
+			<verb>DELETE</verb>
+			<identifier>active:RESTAssured/xml-config</identifier>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Make sure namespace bindings have been cleared">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/xml-config/namespaces</identifier>
+			<representation>org.netkernel.layer0.representation.IHDSNode</representation>
+		</request>
+		<assert>
+			<class>org.netkernel.layer0.representation.IHDSNode</class>
+			<xpath>/namespaces</xpath>
+			<xpath>count(/namespaces/namespace)='0'</xpath>
+		</assert>
+	</test>
+
+	<!-- ======================================================= -->
+
 </testlist>

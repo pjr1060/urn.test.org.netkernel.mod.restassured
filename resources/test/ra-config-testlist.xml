@@ -21,6 +21,7 @@
 			<xpath>string(/ra-config/baseURI)='http://localhost'</xpath>
 			<xpath>string(/ra-config/port)='8080'</xpath>
 			<xpath>string(/ra-config/basePath)=''</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='true'</xpath>
@@ -58,6 +59,7 @@
 			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
 			<xpath>string(/ra-config/port)='9876'</xpath>
 			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
@@ -101,6 +103,7 @@
 			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
 			<xpath>string(/ra-config/port)='9876'</xpath>
 			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
@@ -146,6 +149,7 @@
 			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
 			<xpath>string(/ra-config/port)='9876'</xpath>
 			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
@@ -193,6 +197,7 @@
 			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
 			<xpath>string(/ra-config/port)='9876'</xpath>
 			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
@@ -239,6 +244,7 @@
 			<xpath>string(/ra-config/baseURI)='http://example.com'</xpath>
 			<xpath>string(/ra-config/port)='9876'</xpath>
 			<xpath>string(/ra-config/basePath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='false'</xpath>
@@ -247,7 +253,7 @@
 		</assert>
 	</test>
 
-	<test name="Clear RESTAssured static config for safety">
+	<test name="Reset RESTAssured static config to defaults">
 		<request>
 			<verb>DELETE</verb>
 			<identifier>active:RESTAssured/config</identifier>
@@ -267,6 +273,71 @@
 			<xpath>string(/ra-config/baseURI)='http://localhost'</xpath>
 			<xpath>string(/ra-config/port)='8080'</xpath>
 			<xpath>string(/ra-config/basePath)=''</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='true'</xpath>
+			<xpath>/ra-config/authentication/none</xpath>
+		</assert>
+	</test>
+
+	<test name="Set sparse config">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="config">
+				<literal type="xml">
+					<ra-config>
+						<port>5432</port>
+						<rootPath>/nowhere/man</rootPath>
+					</ra-config>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Test that partial config has been set">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://localhost'</xpath>
+			<xpath>string(/ra-config/port)='5432'</xpath>
+			<xpath>string(/ra-config/basePath)=''</xpath>
+			<xpath>string(/ra-config/rootPath)='/nowhere/man'</xpath>
+			<xpath>string(/ra-config/requestContentType)=''</xpath>
+			<xpath>string(/ra-config/responseContentType)=''</xpath>
+			<xpath>boolean(/ra-config/urlEncodingEnabled)='true'</xpath>
+			<xpath>/ra-config/authentication/none</xpath>
+		</assert>
+	</test>
+
+	<test name="Clear RESTAssured static config for safety">
+		<request>
+			<verb>DELETE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<null/>
+		</assert>
+	</test>
+
+	<test name="Check that config has been reset">
+		<request>
+			<verb>SOURCE</verb>
+			<identifier>active:RESTAssured/config</identifier>
+		</request>
+		<assert>
+			<xpath>/ra-config</xpath>
+			<xpath>string(/ra-config/baseURI)='http://localhost'</xpath>
+			<xpath>string(/ra-config/port)='8080'</xpath>
+			<xpath>string(/ra-config/basePath)=''</xpath>
+			<xpath>string(/ra-config/rootPath)=''</xpath>
 			<xpath>string(/ra-config/requestContentType)=''</xpath>
 			<xpath>string(/ra-config/responseContentType)=''</xpath>
 			<xpath>boolean(/ra-config/urlEncodingEnabled)='true'</xpath>
