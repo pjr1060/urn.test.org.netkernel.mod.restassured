@@ -33,7 +33,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<ra-config>
 						<baseURI>http://example.com</baseURI>
@@ -71,7 +71,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<ra-config>
 						<baseURI>http://example.com</baseURI>
@@ -117,7 +117,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<ra-config>
 						<baseURI>http://example.com</baseURI>
@@ -163,7 +163,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<ra-config>
 						<baseURI>http://example.com</baseURI>
@@ -213,7 +213,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<ra-config>
 						<baseURI>http://example.com</baseURI>
@@ -285,7 +285,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<ra-config>
 						<port>5432</port>

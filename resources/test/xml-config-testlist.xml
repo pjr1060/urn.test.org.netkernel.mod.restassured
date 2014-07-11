@@ -29,7 +29,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/xml-config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<xml-config>
 						<namespace-aware>true</namespace-aware>
@@ -145,7 +145,7 @@
 		<request>
 			<verb>SINK</verb>
 			<identifier>active:RESTAssured/xml-config</identifier>
-			<argument name="config">
+			<argument name="primary">
 				<literal type="xml">
 					<xml-config>
 						<namespaces>
