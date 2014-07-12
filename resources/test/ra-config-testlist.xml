@@ -345,4 +345,23 @@
 		</assert>
 	</test>
 
+	<test name="Test for exception on bad config input">
+		<request>
+			<verb>SINK</verb>
+			<identifier>active:RESTAssured/config</identifier>
+			<argument name="primary">
+				<literal type="xml">
+					<foobar>
+						<blah>5432</blah>
+						<blech>/nowhere/man</blech>
+					</foobar>
+				</literal>
+			</argument>
+		</request>
+		<assert>
+			<exception>java.lang.IllegalArgumentException</exception>
+			<exceptionMessage>Cannot find /ra-config root node</exceptionMessage>
+		</assert>
+	</test>
+
 </testlist>
